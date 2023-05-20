@@ -1,5 +1,6 @@
 rootProject.name = "kafka-practice"
 
 include(
-    "producer-application"
+    "producer-application",
+    "elastic-sink-connector"
 )
