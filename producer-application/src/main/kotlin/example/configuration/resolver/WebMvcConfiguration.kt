@@ -1,4 +1,4 @@
-package org.example.configuration.resolver
+package example.configuration.resolver
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodArgumentResolver

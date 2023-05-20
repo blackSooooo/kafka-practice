@@ -1,7 +1,7 @@
-package org.example.controller
+package example.controller
 
-import org.example.domain.ProducerService
-import org.example.domain.UserColorEvent
+import example.domain.ProducerService
+import example.domain.UserColorEvent
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
