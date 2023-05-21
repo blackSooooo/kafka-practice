@@ -21,7 +21,7 @@ class ConsumerWorker(
 ): Runnable {
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    private val bufferString = ConcurrentHashMap<Int, List<String>>()
+    private val bufferString = ConcurrentHashMap<Int, MutableList<String>>()
     private val currentFileOffset = ConcurrentHashMap<Int, Long>()
 
     constructor(props: Properties, topic: String, number: Int): this(
@@ -52,7 +52,7 @@ class ConsumerWorker(
     }
 
     private fun addHdfsFileBuffer(record: ConsumerRecord<String, String>) {
-        val buffer = bufferString.getOrDefault(record.partition(), listOf()) as MutableList
+        val buffer = bufferString.getOrDefault(record.partition(), mutableListOf())
         buffer.add(record.value())
         bufferString[record.partition()] = buffer
 
@@ -86,7 +86,7 @@ class ConsumerWorker(
                 fileOutputStream.writeBytes(StringUtils.join(bufferString[partition], "\n"))
                 fileOutputStream.close()
 
-                bufferString[partition] = listOf()
+                bufferString[partition] = mutableListOf()
             } catch (e: Exception) {
                 logger.info("${e.message}", e)
             }
